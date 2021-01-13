@@ -7,6 +7,9 @@ import Layout from "../components/layout";
 import MoreStories from "../components/more-stories";
 import { request } from "../lib/datocms";
 import { metaTagsFragment, responsiveImageFragment } from "../lib/fragments";
+import { useRouter } from 'next/router'
+import localize from "../lib/localize"
+import LocaleLinks from "../components/localeLinks"
 
 export async function getStaticProps({ preview }) {
   const graphqlRequest = {
@@ -23,6 +26,10 @@ export async function getStaticProps({ preview }) {
           }
         }
         allPosts(orderBy: date_DESC, first: 20) {
+          _allTitleLocales {
+            locale
+            value
+          }
           title
           slug
           excerpt
@@ -51,14 +58,14 @@ export async function getStaticProps({ preview }) {
     props: {
       subscription: preview
         ? {
-            ...graphqlRequest,
-            initialData: await request(graphqlRequest),
-            token: process.env.NEXT_EXAMPLE_CMS_DATOCMS_API_TOKEN,
-          }
+          ...graphqlRequest,
+          initialData: await request(graphqlRequest),
+          token: process.env.NEXT_EXAMPLE_CMS_DATOCMS_API_TOKEN,
+        }
         : {
-            enabled: false,
-            initialData: await request(graphqlRequest),
-          },
+          enabled: false,
+          initialData: await request(graphqlRequest),
+        },
     },
   };
 }
@@ -68,7 +75,12 @@ export default function Index({ subscription }) {
     data: { allPosts, site, blog },
   } = useQuerySubscription(subscription);
 
-  const heroPost = allPosts[0];
+  const router = useRouter()
+  const { locale } = router
+
+  const heroPost = allPosts[0]
+  const heroTitle = localize(heroPost.title, locale, heroPost._allTitleLocales)
+
   const morePosts = allPosts.slice(1);
   const metaTags = blog.seo.concat(site.favicon);
 
@@ -76,11 +88,12 @@ export default function Index({ subscription }) {
     <>
       <Layout preview={subscription.preview}>
         <Head>{renderMetaTags(metaTags)}</Head>
+        <LocaleLinks />
         <Container>
           <Intro />
           {heroPost && (
             <HeroPost
-              title={heroPost.title}
+              title={heroTitle}
               coverImage={heroPost.coverImage}
               date={heroPost.date}
               author={heroPost.author}

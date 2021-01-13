@@ -1,6 +1,11 @@
 import PostPreview from '../components/post-preview'
+import { useRouter } from 'next/router'
+import localize from "../lib/localize"
 
 export default function MoreStories({ posts }) {
+   const router = useRouter()
+  const { locale } = router
+  
   return (
     <section>
       <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
@@ -10,7 +15,7 @@ export default function MoreStories({ posts }) {
         {posts.map(post => (
           <PostPreview
             key={post.slug}
-            title={post.title}
+            title={localize(post.title, locale, post._allTitleLocales)}
             coverImage={post.coverImage}
             date={post.date}
             author={post.author}

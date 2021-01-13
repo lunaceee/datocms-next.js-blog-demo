@@ -1,26 +1,10 @@
-# A Blog example using Next.js and DatoCMS
+# Mochi diary | 麻薯日志 ｜ Diario de Mochi
 
-This example showcases a Next.js Blog using [DatoCMS](https://www.datocms.com/) as the data source. It fully supports [Preview Mode](https://www.datocms.com/docs/next-js/setting-up-next-js-preview-mode) with [DatoCMS real-time updates](https://www.datocms.com/docs/next-js/real-time-updates).
+## A multi-lingual blog site based on [nextjs-demo](https://github.com/datocms/nextjs-demo/tree/master)
 
-The purpose of this repo is to have a quick start reference that can be set up with the "one-click" button below.
-
-## Demo
-
-Have a look at the end result live:
-
-### [https://nextjs-demo-bay.vercel.app/](https://nextjs-demo-bay.vercel.app/)
+![logo](./logo.png)
 
 ## How to use
-
-### Quick start
-
-1. [Create an account on DatoCMS](https://datocms.com).
-
-2. Make sure that you have set up the [Github integration on Vercel](https://vercel.com/docs/git/vercel-for-github).
-
-3. Let DatoCMS set everything up for you clicking this button:
-
-[![Deploy with DatoCMS](https://dashboard.datocms.com/deploy/button.svg)](https://dashboard.datocms.com/deploy?repo=datocms/nextjs-demo)
 
 ### Local setup
 
@@ -68,7 +52,7 @@ On DatoCMS, go to one of the posts you've created and:
 
 (If it doesn't become draft, you need to go to the model settings for `Post`, go to **Additional Settings**, and turn on **Enable draft/published system**.)
 
-Now, if you go to the post page on localhost, you won't see the updated title. However, if you use the **Preview Mode**, you'll be able to see the change ([Documentation](/docs/advanced-features/preview-mode.md)).
+Now, if you go to the post page on localhost, you won't see the updated title. However, if you use the **Preview Mode**, you'll be able to see the change
 
 To enable the Preview Mode, go to this URL:
 
